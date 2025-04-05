@@ -1,6 +1,6 @@
-# Advanced-WebSys-Activities
+# Advanced Web Systems Activities
 
-this repository is for school purposes and for submission of requirements
-in my course subject Advanced Web Programming
+This repository is for school purposes and contains the requirements for my course, **Advanced Web Programming**.
 
-xoxo, awit
+xoxo,  
+awit
