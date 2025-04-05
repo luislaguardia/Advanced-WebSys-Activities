@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+      background: #f9f9f9;
+    }
+    .container {
+      width: 320px;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    /* Input and Button Styles */
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+    input:focus {
+      border-color: #28a745;
+      outline: none;
+      box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    button:hover {
+      background: #218838;
+      transform: scale(1.05);
+    }
+
+    /* Task List Styles */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      background: #fafafa;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    li span {
+      flex: 1;
+      margin-right: 10px;
+      transition: color 0.3s, text-decoration 0.3s ease-in-out;
+    }
+    
+    /* Completed Task Styles */
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Task Buttons */
+    li button {
+      background: #007bff;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin-left: 5px;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    li button:last-child {
+      background: #dc3545;
+    }
+    li button:hover {
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <div class="input-container">
+      <input type="text" id="taskInput" placeholder="Enter a task">
+      <button id="addButton">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+  
+  <script>
+    // Task class with properties: title and isCompleted
+    class Task {
+      constructor(title) {
+        this.title = title;
+        this.isCompleted = false;
+      }
+    }
+
+    // DOM elements
+    const taskInput = document.getElementById('taskInput');
+    const addButton = document.getElementById('addButton');
+    const taskList = document.getElementById('taskList');
+
+    // Function to add a new task
+    function addTask() {
+      const taskTitle = taskInput.value.trim();
+      if (taskTitle === "") {
+        alert("Please enter a task.");
+        return;
+      }
+
+      // Create a new Task instance and log it to the console.
+      const newTask = new Task(taskTitle);
+      console.log("Added TODO:", newTask);
+
+      // Create list item for the task
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      span.textContent = newTask.title;
+
+      // Create a button to mark the task as completed
+      const completeButton = document.createElement('button');
+      completeButton.textContent = '✔';
+      completeButton.addEventListener('click', () => {
+        newTask.isCompleted = !newTask.isCompleted;
+        span.classList.toggle('completed');
+        console.log("Complete TODO:", newTask);
+      });
+
+      // Create a button to remove the task
+      const removeButton = document.createElement('button');
+      removeButton.textContent = '✖';
+      removeButton.addEventListener('click', () => {
+        li.style.opacity = "0";
+        li.style.transform = "translateY(-10px)";
+        setTimeout(() => taskList.removeChild(li), 300);
+        console.log("Removed TODO:", newTask);
+      });
+
+      // Append elements to the list item and then the list
+      li.appendChild(span);
+      li.appendChild(completeButton);
+      li.appendChild(removeButton);
+      taskList.appendChild(li);
+
+      // Clear the input field
+      taskInput.value = "";
+    }
+
+    // Event listeners for the Add button and Enter key
+    addButton.addEventListener('click', addTask);
+    taskInput.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
