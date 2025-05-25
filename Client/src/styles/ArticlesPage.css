@@ -1,0 +1,127 @@
+.article-container {
+    padding: 2rem;
+  }
+  
+  .article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .article-header h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .article-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .article-table th,
+  .article-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
+  
+  .article-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .article-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .edit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .add-article-btn {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .modal-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .modal-box form {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  
+  .modal-box label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  
+  .modal-box input,
+  .modal-box textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .modal-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .article-searchbar {
+    margin-bottom: 1rem;
+  }
+  
+  .article-searchbar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }

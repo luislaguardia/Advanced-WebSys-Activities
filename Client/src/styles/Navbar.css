@@ -1,0 +1,269 @@
+.navbar {
+  background-color: #1e1e1e;
+  padding: 0 0; 
+  /* adjust */
+  border-bottom: 1px solid #444;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar-container {
+  padding-left: 190px; /* match sidebar width */
+  padding-right: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ADD this if you want the logo pushed to the absolute left */
+.logo {
+  margin-left: 0;
+}
+
+.logo-img {
+  max-height: 100px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin-left: -150px; /* shift more to the left */
+}
+
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #f0f0f0;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.nav-menu li a:hover {
+  color: #ff9900;
+}
+
+.login-btn {
+  padding: 8px 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #ff9900;
+  color: #1e1e1e;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background-color: #f0f0f0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.hamburger span.open:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.hamburger span.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger span.open:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 35px;
+    gap: 20px;
+    display: none;
+    z-index: 999;
+    border-top: 1px solid #333;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .login-btn {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: -50px; /* space between logo and greeting */
+}
+
+.navbar-greeting {
+  color: #f0f0f0;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: px; /* aligns better vertically with logo */
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-greeting {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    padding: 10px 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .logo-img {
+    max-height: 60px;
+    margin-left: 0;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
+  .navbar-greeting {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #f0f0f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 35px;
+    gap: 20px;
+    display: none;
+    z-index: 999;
+    border-top: 1px solid #333;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .login-btn {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1000;
+  }
+
+  .hamburger span {
+    height: 3px;
+    width: 25px;
+    background-color: #f0f0f0;
+    transition: 0.3s;
+    border-radius: 2px;
+  }
+
+  .hamburger span.open:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+  }
+
+  .hamburger span.open:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger span.open:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

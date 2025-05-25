@@ -1,0 +1,91 @@
+/* Make the 404 page full screen and fix it to one page without scrolling */
+.not-found-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;  /* Full height of the viewport */
+    background-color: #f6f7fb;
+    overflow: hidden; /* Prevent scrolling */
+  }
+  
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px; 
+    background-color: white;
+    border-radius: 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    gap: 50px;
+  }
+  
+  .image-container {
+    flex-shrink: 0;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .funny-image {
+    width: 100%;  
+    max-width: 320px; 
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 60%;
+  }
+  
+  .heading {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 16px;
+  }
+  
+  .subheading {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 12px;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  
+  .home-button {
+    display: inline-block;
+    background-color: #0063e5;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px; 
+  }
+  
+  .home-button:hover {
+    background-color: #0052c1;
+    transform: translateY(-2px);
+  }
+  
+  .home-button:focus {
+    outline: none;
+    ring: 2px solid #0063e5;
+    ring-offset: 2px;
+  }
+  
