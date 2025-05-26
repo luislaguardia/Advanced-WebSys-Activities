@@ -126,43 +126,46 @@ const DashArticleListPage = () => {
       </table>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <h3>{editingId ? 'Edit Article' : 'Add Article'}</h3>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label>Title</label>
-                <input name="title" value={formData.title} onChange={handleChange} />
-              </div>
-              <div>
-                <label>Author</label>
-                <input name="author" value={formData.author} onChange={handleChange} />
-              </div>
-              <div>
-                <label>Category</label>
-                <input name="category" value={formData.category} onChange={handleChange} />
-              </div>
-              <div style={{ gridColumn: '1 / -1' }}>
-                <label>Content</label>
-                <textarea
-                  name="content"
-                  rows="5"
-                  value={formData.content}
-                  onChange={handleChange}
-                ></textarea>
-              </div>
-              <div className="modal-footer">
-                <button type="submit" className="edit-btn">
-                  {editingId ? 'Update' : 'Create'}
-                </button>
-                <button type="button" onClick={() => setShowModal(false)} className="cancel-btn">
-                  Cancel
-                </button>
-              </div>
-            </form>
+  <div className="modal-overlay">
+    <div className="modal-box">
+      <h3>{editingId ? 'Edit Article' : 'Add New Article'}</h3>
+      <form onSubmit={handleSubmit} className="modal-form">
+        <div className="form-grid">
+          <div className="form-group">
+            <label>Title</label>
+            <input name="title" value={formData.title} onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label>Author</label>
+            <input name="author" value={formData.author} onChange={handleChange} />
+          </div>
+          <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+            <label>Category</label>
+            <input name="category" value={formData.category} onChange={handleChange} />
+          </div>
+          <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+            <label>Content</label>
+            <textarea
+              name="content"
+              rows="5"
+              value={formData.content}
+              onChange={handleChange}
+            ></textarea>
           </div>
         </div>
-      )}
+
+        <div className="modal-footer">
+          <button type="submit" className="edit-btn">
+            {editingId ? 'Update' : 'Create'}
+          </button>
+          <button type="button" onClick={() => setShowModal(false)} className="delete-btn">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 };

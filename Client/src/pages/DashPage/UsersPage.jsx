@@ -160,58 +160,91 @@ const UsersPage = () => {
       </div>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <h3>{editingId ? 'Edit User' : 'Add New User'}</h3>
-            <form onSubmit={handleSubmit}>
-              {Object.keys(formData).map((key) =>
-                !['_id', '__v', 'password'].includes(key) && (
-                  <div key={key}>
-                    <label>{key}</label>
-                    <input
-                      name={key}
-                      type={typeof formData[key] === 'boolean' ? 'checkbox' : 'text'}
-                      value={
-                        typeof formData[key] === 'boolean'
-                          ? undefined
-                          : formData[key]
-                      }
-                      checked={
-                        typeof formData[key] === 'boolean'
-                          ? formData[key]
-                          : undefined
-                      }
-                      onChange={handleChange}
-                    />
-                  </div>
-                )
-              )}
+  <div className="modal-overlay">
+    <div className="modal-box">
+      <h3>{editingId ? 'Edit User' : 'Add New User'}</h3>
+      <form onSubmit={handleSubmit} className="modal-form">
 
-              {/* Show password only on Create */}
-              {!editingId && (
-                <div>
-                  <label>Password</label>
-                  <input
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                </div>
-              )}
+  <div className="form-section">
+    <p className="form-section-title">User Info</p>
+    <div className="form-grid">
+      <div className="form-group">
+        <label>First Name</label>
+        <input name="firstName" value={formData.firstName} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label>Last Name</label>
+        <input name="lastName" value={formData.lastName} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label>Email</label>
+        <input name="email" value={formData.email} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label>Role</label>
+        <select name="type" value={formData.type} onChange={handleChange}>
+          <option value="editor">Editor</option>
+          <option value="admin">Admin</option>
+          <option value="viewer">Viewer</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
-              <div className="modal-footer">
-                <button type="submit" className="edit-btn">
-                  {editingId ? 'Update' : 'Create'}
-                </button>
-                <button type="button" onClick={() => setShowModal(false)} className="cancel-btn">
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
+  <div className="form-section">
+    <p className="form-section-title">Contact & Details</p>
+    <div className="form-grid">
+      <div className="form-group">
+        <label>Contact Number</label>
+        <input name="contactNumber" value={formData.contactNumber} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label>Address</label>
+        <input name="address" value={formData.address} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label>Age</label>
+        <input name="age" value={formData.age} onChange={handleChange} />
+      </div>
+      <div className="form-group">
+        <label>Gender</label>
+        <select name="gender" value={formData.gender} onChange={handleChange}>
+          <option value="">Select</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div className="form-section">
+    <p className="form-section-title">Account</p>
+    <div className="form-grid">
+      <div className="form-group">
+        <label>Username</label>
+        <input name="username" value={formData.username} onChange={handleChange} />
+      </div>
+      {!editingId && (
+        <div className="form-group">
+          <label>Password</label>
+          <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
       )}
+    </div>
+  </div>
+
+  <div className="modal-footer">
+    <button type="submit" className="edit-btn">
+      {editingId ? 'Update' : 'Create'}
+    </button>
+    <button type="button" className="cancel-btn" onClick={() => setShowModal(false)}>
+      Cancel
+    </button>
+  </div>
+</form>
+    </div>
+  </div>
+)}
     </div>
   );
 };
