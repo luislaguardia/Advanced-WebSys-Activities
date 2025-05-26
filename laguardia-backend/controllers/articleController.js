@@ -1,6 +1,5 @@
 import Article from '../models/Article.js';
 
-// GET all articles
 export const getArticles = async (req, res) => {
   try {
     const articles = await Article.find();
@@ -10,7 +9,6 @@ export const getArticles = async (req, res) => {
   }
 };
 
-// CREATE article
 export const createArticle = async (req, res) => {
   try {
     const { title, content, author, category } = req.body;
@@ -22,7 +20,6 @@ export const createArticle = async (req, res) => {
   }
 };
 
-// UPDATE article
 export const updateArticle = async (req, res) => {
   try {
     const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
@@ -36,7 +33,6 @@ export const updateArticle = async (req, res) => {
   }
 };
 
-// DELETE article
 export const deleteArticle = async (req, res) => {
   try {
     const article = await Article.findByIdAndDelete(req.params.id);

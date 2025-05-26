@@ -2,17 +2,15 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-// Get all users (without passwords)
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}, '-password'); // exclude password
+    const users = await User.find({}, '-password'); // exclude paasssaa
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Create new user
 export const createUser = async (req, res) => {
   try {
     if (!req.body.password) {
@@ -32,10 +30,8 @@ export const createUser = async (req, res) => {
   }
 };
 
-// Update user
 export const updateUser = async (req, res) => {
   try {
-    // If password is being updated, hash it
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 10);
     }
@@ -52,7 +48,6 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// Delete user
 export const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
@@ -62,7 +57,6 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-// Login user
 export const loginUser = async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -80,7 +74,7 @@ export const loginUser = async (req, res) => {
       const token = jwt.sign(
         { id: user._id, email: user.email, type: user.type },
         process.env.JWT_SECRET,
-        { expiresIn: '1h' } // match screenshot
+        { expiresIn: '1h' } 
       );
   
       res.json({
