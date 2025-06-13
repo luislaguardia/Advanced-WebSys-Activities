@@ -37,14 +37,14 @@ app.use('/api/articles', articleRoutes);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '../robles-front-end/dist'); // papalitan to, galing kay sir
-  app.use(express.static(frontendPath));
+// if (process.env.NODE_ENV === 'production') {
+//   const frontendPath = path.join(__dirname, '../robles-front-end/dist'); // papalitan to, galing kay sir
+//   app.use(express.static(frontendPath));
 
-  app.get('*', (req, res) =>
-    res.sendFile(path.join(frontendPath, 'index.html'))
-  );
-}
+//   app.get('*', (req, res) =>
+//     res.sendFile(path.join(frontendPath, 'index.html'))
+//   );
+// }
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
