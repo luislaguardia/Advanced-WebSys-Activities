@@ -31,7 +31,7 @@ function DashLayout() {
           borderBottom: '1px solid #ccc',
           position: 'sticky',
           top: '64px',
-          zIndex: 1000,
+          zIndex: 100, // Reduced from 1000 to 100
         }}
       >
         {navLinks.map(({ path, label }) => (

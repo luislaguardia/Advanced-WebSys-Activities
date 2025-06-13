@@ -13,11 +13,18 @@ export const getUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    if (!req.body.password) {
-      return res.status(400).json({ message: 'Password is required' });
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: 'Email already in use' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       ...req.body,

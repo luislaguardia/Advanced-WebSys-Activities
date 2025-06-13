@@ -1,29 +1,42 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { createUser } from '../services/UserService'; // ✅ adjust path if needed
 
-// mnew page for lab act 5
 export default function RegistrationPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    setError('');
+
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      setError('Passwords do not match!');
       return;
     }
-    console.log('Registered:', { email, password });
 
-    navigate('/');
+    try {
+      await createUser({ email, password });
+      navigate('/login');
+    } catch (err) {
+      if (err.response && err.response.status === 409) {
+        setError('Email already in use.');
+      } else {
+        setError('Registration failed. Please try again.');
+      }
+    }
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.formContainer}>
         <h2 style={styles.heading}>Register</h2>
+
+        {error && <p style={styles.error}>{error}</p>}
+
         <form onSubmit={handleRegister} style={styles.form}>
           <input
             type="email"
@@ -51,8 +64,12 @@ export default function RegistrationPage() {
           />
           <button type="submit" style={styles.submitBtn}>Register</button>
         </form>
+
         <div style={styles.registerText}>
-          <p>Already have an account? <Link to="/" style={styles.link}>Login</Link> </p>
+          <p>
+            Already have an account?{' '}
+            <Link to="/login" style={styles.link}>Login</Link>
+          </p>
         </div>
       </div>
     </div>
@@ -62,7 +79,7 @@ export default function RegistrationPage() {
 const styles = {
   container: {
     backgroundColor: '#f7f7f7',
-    height: '100vh',
+    height: '85dvh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -108,9 +125,6 @@ const styles = {
     transition: 'background-color 0.3s',
     fontWeight: '500',
   },
-  submitBtnHover: {
-    backgroundColor: '#357AB7',
-  },
   registerText: {
     marginTop: '15px',
     fontSize: '14px',
@@ -122,5 +136,10 @@ const styles = {
     fontWeight: '500',
     marginTop: '10px',
     display: 'inline-block',
+  },
+  error: {
+    color: 'red',
+    fontSize: '14px',
+    marginBottom: '15px',
   },
 };

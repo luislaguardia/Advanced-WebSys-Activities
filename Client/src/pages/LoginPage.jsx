@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../services/UserService';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -24,18 +25,20 @@ export default function LoginPage() {
     if (!validateFields()) return;
 
     setLoading(true);
+    setError('');
     try {
       const { data } = await loginUser({ email, password });
-      console.log(' Login success:', data);
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('type', data.type);
       localStorage.setItem('firstName', data.firstName);
 
+      toast.success('Login successful!');
       navigate('/dashboard');
     } catch (err) {
-      console.error(' Login failed:', err.response?.data || err.message);
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      const msg = err.response?.data?.message || 'Login failed. Please try again.';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -57,8 +60,8 @@ export default function LoginPage() {
                 setEmail(e.target.value);
                 setFieldError((prev) => ({ ...prev, email: '' }));
               }}
-              required
               style={styles.inputField}
+              disabled={loading}
             />
             {fieldError.email && <p style={styles.fieldError}>{fieldError.email}</p>}
           </div>
@@ -72,8 +75,8 @@ export default function LoginPage() {
                 setPassword(e.target.value);
                 setFieldError((prev) => ({ ...prev, password: '' }));
               }}
-              required
               style={styles.inputField}
+              disabled={loading}
             />
             {fieldError.password && <p style={styles.fieldError}>{fieldError.password}</p>}
           </div>
@@ -82,8 +85,12 @@ export default function LoginPage() {
             {loading ? 'Logging in...' : 'Log In'}
           </button>
         </form>
+
         <div style={styles.registerText}>
-          <p>Don't have an account? <Link to="/register" style={styles.link}>Register</Link></p>
+          <p>
+            Don't have an account?{' '}
+            <Link to="/register" style={styles.link}>Register</Link>
+          </p>
         </div>
       </div>
     </div>
@@ -91,38 +98,48 @@ export default function LoginPage() {
 }
 
 const styles = {
+  // container: {
+  //   backgroundColor: '#f7f7f7',
+  //   height: '100vh',
+  //   padding: '20px',
+  //   display: 'flex',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
   container: {
     backgroundColor: '#f7f7f7',
-    height: '100vh',
+    height: '85dvh', // Modern alternative to handle mobile browsers correctly
+    overflow: 'hidden', // Prevent scrollbars
+    margin: 0,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   formContainer: {
     backgroundColor: '#fff',
-    padding: '40px 50px',
-    borderRadius: '15px',
-    boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
-    maxWidth: '400px',
+    padding: '50px 60px',
+    borderRadius: '20px',
+    boxShadow: '0 12px 24px rgba(0, 0, 0, 0.15)',
+    maxWidth: '500px',
     width: '100%',
     textAlign: 'center',
   },
   heading: {
-    fontSize: '28px',
-    fontWeight: '600',
+    fontSize: '32px',
+    fontWeight: '700',
     color: '#333',
-    marginBottom: '30px',
+    marginBottom: '35px',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px',
+    gap: '24px',
   },
   inputField: {
-    padding: '16px',
-    fontSize: '16px',
+    padding: '18px',
+    fontSize: '17px',
     border: '1px solid #ccc',
-    borderRadius: '8px',
+    borderRadius: '10px',
     width: '100%',
     boxSizing: 'border-box',
     outline: 'none',
@@ -130,24 +147,24 @@ const styles = {
   },
   fieldError: {
     color: 'red',
-    fontSize: '12px',
+    fontSize: '13px',
     textAlign: 'left',
-    marginTop: '5px',
+    marginTop: '6px',
   },
   submitBtn: {
-    padding: '14px',
+    padding: '16px',
     fontSize: '18px',
     backgroundColor: '#4A90E2',
     color: '#fff',
     border: 'none',
-    borderRadius: '8px',
+    borderRadius: '10px',
     cursor: 'pointer',
     transition: 'background-color 0.3s',
-    fontWeight: '500',
+    fontWeight: '600',
   },
   registerText: {
-    marginTop: '15px',
-    fontSize: '14px',
+    marginTop: '20px',
+    fontSize: '15px',
     color: '#666',
   },
   link: {
